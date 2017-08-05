@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use SON\Models\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -11,10 +12,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\SON\User::class)->create([
+        factory(User::class)->create([
             'name' => 'Rogerio',
             'email' => 'rogerio@email.com'
         ]);
-        factory(\SON\User::class, 19)->create();
+        factory(User::class, 19)->create();
     }
 }

@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
         //
 
         /*
@@ -177,6 +178,7 @@ return [
         // SON\Providers\BroadcastServiceProvider::class,
         SON\Providers\EventServiceProvider::class,
         SON\Providers\RouteServiceProvider::class,
+        SON\Providers\RepositoryServiceProvider::class,
 
     ],
 
