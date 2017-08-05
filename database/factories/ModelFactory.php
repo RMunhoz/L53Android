@@ -30,3 +30,17 @@ $factory->define(SON\Models\Category::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
     ];
 });
+
+$factory->define(SON\Models\BillPay::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+        'name' => $faker->name,
+        'date_due' => $faker->date(),
+        'value' => $faker->randomFloat(2,100,1000),
+        'done' => (bool) rand(0,1),
+        'category_id' => rand(1,50),
+    ];
+});
+
+

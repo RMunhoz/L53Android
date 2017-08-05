@@ -8,21 +8,20 @@ use SON\Http\Controllers\Controller;
 use SON\Http\Requests;
 use Prettus\Validator\Contracts\ValidatorInterface;
 use Prettus\Validator\Exceptions\ValidatorException;
-use SON\Http\Requests\CategoryRequest;
-use SON\Http\Requests\CategoryUpdateRequest;
-use SON\Repositories\CategoryRepository;
-use SON\Validators\CategoryValidator;
+use SON\Http\Requests\BillPayRequest;
+use SON\Repositories\BillPayRepository;
 
 
-class CategoriesController extends Controller
+
+class BillPaysController extends Controller
 {
 
     /**
-     * @var CategoryRepository
+     * @var BillPayRepository
      */
     protected $repository;
 
-    public function __construct(CategoryRepository $repository)
+    public function __construct(BillPayRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -32,10 +31,11 @@ class CategoriesController extends Controller
         return $this->repository->all();
     }
 
-    public function store(CategoryRequest $request)
+    public function store(BillPayRequest $request)
     {
-        $category = $this->repository->create($request->all());
-        return response()->json($category, 201);
+        $data = $request->except('done');
+        $billPay = $this->repository->create($data);
+        return response()->json($billPay,201);
     }
 
     public function show($id)
@@ -43,12 +43,11 @@ class CategoriesController extends Controller
         return $this->repository->find($id);
     }
 
-    public function update(CategoryRequest $request, $id)
+    public function update(BillPayRequest $request, $id)
     {
-        $category = $this->repository->update($request->all(), $id);
-        return response()->json($category,200);
+        $billPay = $this->repository->update($request->all(), $id);
+        return response()->json($billPay,200);
     }
-
 
     public function destroy($id)
     {
