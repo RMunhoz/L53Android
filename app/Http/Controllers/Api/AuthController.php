@@ -33,4 +33,15 @@ class AuthController extends Controller
         }
         return response()->json([],204);
     }
+
+    public function refreshToken(Request $request)
+    {
+        try{
+            $bearerToken = \JWTAuth::setRequest($request)->getToken();
+            $token = \JWTAuth::refresh($bearerToken);
+        }catch (JWTException $ex){
+            return response()->json(['error' => 'could_not_refresh_token'],500);
+        }
+        return response()->json(compact('token'));
+    }
 }
