@@ -8,6 +8,11 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
+    /**
+     * @SWG\Info(title="Rogerio Munhoz - Financeiro API", version="0.0.1")
+     */
+
+    
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');

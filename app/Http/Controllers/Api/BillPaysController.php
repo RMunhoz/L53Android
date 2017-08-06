@@ -24,6 +24,7 @@ class BillPaysController extends Controller
     public function __construct(BillPayRepository $repository)
     {
         $this->repository = $repository;
+        $this->repository->applyMultitenancy();
     }
 
     public function index()
@@ -58,5 +59,10 @@ class BillPaysController extends Controller
         }else{
             return response()->json(['error' => 'Resource can not be deleted'],500);
         }
+    }
+
+    public function calculateTotal()
+    {
+        return $this->repository->calculateTotal();
     }
 }

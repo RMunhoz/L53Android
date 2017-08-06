@@ -5,6 +5,7 @@ namespace SON\Repositories;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use SON\Models\Category;
+use SON\Presenters\CategoryPresenter;
 
 /**
  * Class CategoryRepositoryEloquent
@@ -22,13 +23,21 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
         return Category::class;
     }
 
-    
-
-    /**
+   /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return CategoryPresenter::class;
+    }
+
+    public function applyMultitenancy()
+    {
+        Category::clearBootedModels();
     }
 }
