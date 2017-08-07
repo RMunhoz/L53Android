@@ -12,7 +12,24 @@ class AuthController extends Controller
      * @SWG\Info(title="Rogerio Munhoz - Financeiro API", version="0.0.1")
      */
 
-    
+
+    /**
+     * Requisitar token JWT
+     *
+     * @SWG\POST(
+     *     path="/api/login",
+     *     @SWG\Parameter(
+     *          name="body", in="body", required=true,
+     *          @SWG\Schema(
+     *              @SWG\Property(property="email", type="string"),
+     *              @SWG\Property(property="password", type="string"),
+     *          )
+     *     ),
+     *     @SWG\Response(
+     *      response="200", description="Token JWT"
+     *     )
+     * )
+     */
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -29,6 +46,16 @@ class AuthController extends Controller
         return response()->json(compact('token'));
     }
 
+    /**
+     * Revogar token JWT
+     * @SWG\POST(
+     *     path="/api/logout",
+     *     @SWG\Parameter(
+     *          name="Authorization", in="header", type="string", description="Bearer __token__"
+     *     ),
+     *     @SWG\Response(response="204", description="No content")
+     * )
+     */
     public function logout()
     {
         try{
